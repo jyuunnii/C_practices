@@ -12,17 +12,17 @@ typedef struct stack * Stack; //stack의 포인터 변수 == Stack(데이터타�
 typedef int element;
 
 struct stack {
-	element * array; //포인터 변수 선언 == int * array
+	element * array; //구조체 내 배열에 사용될 포인터 변수 선언 == int * array
 	int size;
 	int top;
 };
 
 Stack createStack(int c){
-	Stack S = (Stack) malloc(sizeof(struct stack)); //실질적인 메모리 할당
+	Stack S = (Stack) malloc(sizeof(struct stack)); //구조체 포인터 매칭(malloc은 구조체 메모리에 대한 주소를 반환하고 S에 대입)
 	
 	S->size = c; // S->size == *(S).size
 	S->top = -1; //스택 초기화 및 비우기
-	S->array = (int *) malloc(sizeof(int)*c); //미리 선언한 포인터 변수에 대입
+	S->array = (int *) malloc(sizeof(int)*c); //구조체 내 배열에 대한 포인터 매칭(배열 포인터 타입은 int!)
 
 	return S;
 }
