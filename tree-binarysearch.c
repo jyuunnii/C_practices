@@ -160,8 +160,8 @@ Node deleteNode (int val, Tree tree) {
                 Node temp = tree->rightChild;
                 tree->value = temp->value;
                 tree->rightChild = NULL;
-                free(temp); 
-                return tree;
+                free(tree); 
+                return temp;
             }
         }
         //4. The node has one left child  
@@ -169,8 +169,8 @@ Node deleteNode (int val, Tree tree) {
             Node temp = tree->leftChild;
             tree->value = temp->value;
             tree->leftChild = NULL;
-            free(temp);
-            return tree;
+            free(tree);
+            return temp;
         }
         
     }
