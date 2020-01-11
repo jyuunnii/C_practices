@@ -3,12 +3,12 @@
     BFS ---------------------
     지나온 노드 순서대로 출력
     queue 사용 FIFO (단, queue는 1부터 사용)
-    start: starting vertex number
+    v: starting vertex number
     loopCnt: for loop count 
 
     DFS ----------------------
-    연결된 노드 따라 출력(recursive)
-    v: starting vertex number
+    연결된 노드 따라 출력
+    recursive algorithm
 */
 
 int graph[10][10] =
@@ -25,14 +25,14 @@ int graph[10][10] =
 int visit_dfs[10] = {0,0,0,0,0,0,0,0,0,0};
 int visit_bfs[10] = {0,0,0,0,0,0,0,0,0,0};
 int queue[11];
-int count = 0; // recursiveness count
+int count = 0; 
 
 void dfs(int v, int loopCnt) {
     visit_dfs[v] = 1;
-    count++; 
+    count++; // recursiveness count
 
     // print DFS
-    if(v == 0 ) printf("DFS:\n");
+    if(v == 0 ) printf("DFS:");
 
     printf("%d > ", v);
 
@@ -48,30 +48,33 @@ void dfs(int v, int loopCnt) {
     return;
 }
 
-void bfs(int start, int loopCnt) {
-    visit_dfs[start] = 1;
-    queue[1] = 0; //start vertex = 0
-    int k = 2; 
+void bfs(int v, int loopCnt) {
+    int front = -1;
+    int rear = -1;
 
-   for(int i=0; i<loopCnt; i++){ // i행의 노드에 연결된 노드 확인
-       for(int j=start; j< loopCnt; j++){ //i행의 (loopCnt-start)개의 j열 검사
-           //printf("%d", graph[i][j]); 
-           if((graph[i][j] == 1)&&(visit_bfs[j] != 1)){ //1이고 방문기록이 없으면 queue에 insert, visit[j]=1
-               queue[k] = j;
-               k++;
+    rear++;
+    queue[rear] = v; //start vertex = 0
+    visit_dfs[v] = 1;
+    printf("BFS:");
+    printf("%d > ", v);
+
+    while(front < rear){
+        front++;
+        int i = queue[front]; //front 값을 1 올리고, 다음 노드 값(i행)으로 queue[front] 대입
+
+        for(int j=1; j< loopCnt; j++){ 
+           if((graph[i][j] == 1)&&(visit_bfs[j] != 1)){ //값이 1이고 방문기록이 없으면
+               rear++;
+               queue[rear] = j; 
                visit_bfs[j] = 1;
+
+               printf("%d > ", j);
            }
        }   
-        start++; 
-   }
-   
-   //print BFS
-   printf("BFS: \n");
-   for(k=1; k<11; k++){
-        printf("%d > ", queue[k]);
-   }
-   printf("Finish\n");
+  
+    }
 
+    printf("Finish\n");
    return;
 }
 
