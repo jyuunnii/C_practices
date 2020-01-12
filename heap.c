@@ -2,9 +2,17 @@
 #include <stdlib.h>
 
 /*
-	Min heap
-	Heap 정렬에서 array[1]부터 사용
-	array[0]은 사용하지 않음!
+	Heap sort: child node보다 parent node가 우선순위가 높은 완전이진트리
+	Min heap: 원소의 크기가 작을수록 우선순위 높음
+	[i]=> parent: [i/2]
+	[i]=> child: [2*i] and [2*i+1]
+	Heap 정렬에서 array[1]부터 사용 => 노드 순번 1부터
+
+	insert_min_heap ---------------------------
+	Insert 시 heap 배열의 맨 뒤에 원소를 붙이고 부모 노드의 값과 비교해가며 min-heap 조건에 맞게 위치 변경
+
+	delete_min_heap ---------------------------
+	Delete 시 heap 배열의 root node를 삭제하고, 그 자리에 배열의 맨 뒤 노드를 대체한 후 자식 노드의 값과 비교해가며 min-heap 조건에 맞게 위치 변경
 */
 
 #define MAX_ELEMENTS 10
@@ -19,7 +27,6 @@ typedef struct{
 element heap[MAX_ELEMENTS];
 int size = 0;
 int i = 0;
-// int j = 1;
 
 void insert_min_heap(element item);
 element delete_min_heap(void);
