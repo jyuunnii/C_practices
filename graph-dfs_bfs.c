@@ -1,13 +1,17 @@
 #include <stdio.h>
 /*
-    BFS ---------------------
-    지나온 노드 순서대로 출력
-    queue 사용 FIFO (단, queue는 1부터 사용)
-    v: starting vertex number
-    loopCnt: for loop count 
-
-    DFS ----------------------
-    연결된 노드 따라 출력
+    Graph Search? 하나의 vertex에서 시작해 모든 vertice를 한 번 씩 방문하는 것 
+    => 방문여부를 반드시 확인 visit[]
+    => 확인하지 않으면 무한 루프 빠질 수 있음
+    
+    BFS (Breadth First Search)---------------------
+    시작 v에서 가까운 v를 먼저 방문하고 먼 v를 나중에 방문하는 순회
+    사용예: 두 노드 사이의 최단경로, 임의의 경로를 찾는 경우
+    방문한 노드를 차례대로 저장하고 꺼낼 수 있는 자료구조인 Queue 사용(FIFO)
+   
+    DFS (Depth First Search)----------------------
+    시작 v에서 한 방향으로 갈 수 있을만큼 계속 가다가 더이상 갈 수 없으면 backtracking해서 다른 방향으로 다시 탐색
+    사용예: 모든 노드를 방문해야하는 경우
     recursive algorithm
 */
 
@@ -27,6 +31,7 @@ int visit_bfs[10] = {0,0,0,0,0,0,0,0,0,0};
 int queue[11];
 int count = 0; 
 
+ //v: starting vertex number, loopCnt: for-loop count 
 void dfs(int v, int loopCnt) {
     visit_dfs[v] = 1;
     count++; // recursiveness count
